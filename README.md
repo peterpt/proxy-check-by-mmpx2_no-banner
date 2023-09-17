@@ -1,4 +1,6 @@
-# PROXY-CHECK
+# PROXY-CHECK No Banner
+- Proxy check version from mmpx12 without banner for script integration
+- Doing tests with this tool to /dev/null banner always popped up so it was removed and its dependencies
 
 Check if proxies are working (http, socks4 & socks5)
 
