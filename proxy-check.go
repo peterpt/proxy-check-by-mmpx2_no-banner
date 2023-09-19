@@ -54,19 +54,19 @@ func ProxyTest(client *http.Client, proxy, urlTarget, timeout string) bool {
 	}
 	if err != nil {
 		if disableBar {
-			fmt.Println("\033[31m[X] ", proxy, "\033[0m")
+			fmt.Println("\033[31m[Offline] ", proxy, "\033[0m")
 		}
 		return false
 	}
 
 	if resp.StatusCode != http.StatusOK {
 		if disableBar {
-			fmt.Println("\033[31m[X] ", proxy, "\033[0m")
+			fmt.Println("\033[31m[Offline] ", proxy, "\033[0m")
 		}
 		return false
 	}
 	if disableBar {
-		fmt.Println("\033[32m[√] ", proxy, "\033[0m")
+		fmt.Println("\033[32m[Online] ", proxy, "\033[0m")
 	}
 	mu.Lock()
 	valid = append(valid, proxy)
@@ -144,9 +144,6 @@ func main() {
 	op.On("-g", "--github", "use github.com/mmpx12/proxy-list", &github)
 	op.On("-o", "--output FILE", "File to write valid proxies", &output)
 	op.On("-v", "--version", "Print version and exit", &printversion)
-	op.Exemple("proxy-check -r -m 30 --socks5 -o valid-socks5.txt  -g")
-	op.Exemple("proxy-check -m 30 -o valid.txt -U 'https://raw.githubusercontent.com/mmpx12/proxy-list/master/proxies.txt'")
-	op.Exemple("proxy-check -u ipinfo.io -T 6 /path/to/proxy")
 	err := op.Parse()
 	if err != nil {
 		print(err.Error(), "\n")
